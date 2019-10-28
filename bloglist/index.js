@@ -1,15 +1,12 @@
 require('dotenv').config()
-const http = require('http') 
+const http = require('http') //index.js
 const express = require('express')
-const app = express() 
+const app = express() //index.js
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const url = process.env.MONGODB_URI
-
-//const config = require('.utils/config')
-
-//const server = http.createServer(app)
+const config = require('./utils/config') // index.js
+const server = http.createServer(app) // index.js
 
 
 //server.listen(config.PORT, () => {
@@ -25,8 +22,9 @@ const blogSchema = mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema)
 
-console.log('connectin to dis: ', url)
-mongoose.connect(url, { useNewUrlParser: true })
+console.log('connectin to dis: ', config.MONGODB_URI)
+
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
   .then(result => {
     console.log('connected to your super amazing MongoDB')
   })
@@ -69,7 +67,6 @@ app.post('/api/blogs', (request, response) => {
     })
 })
 
-const PORT = 3003
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+server.listen(config.PORT, () => {
+  console.log(`Server running on port ${config.PORT}`)
 })
