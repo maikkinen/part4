@@ -8,19 +8,14 @@ const mongoose = require('mongoose')
 const config = require('./utils/config') // index.js
 const server = http.createServer(app) // index.js
 
+const Blog = require('./models/blogpost.js')
+
 
 //server.listen(config.PORT, () => {
 //  console.log(`Server running on port ${config.PORT}`)
 //})
 
-const blogSchema = mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
-  likes: Number
-})
-
-const Blog = mongoose.model('Blog', blogSchema)
+//const Blog = mongoose.model('Blog', blogSchema)
 
 console.log('connectin to dis: ', config.MONGODB_URI)
 
