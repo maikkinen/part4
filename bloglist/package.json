@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
-    "test": "echo\"Error: no test specified dude\" && exit 1",
+    "test": "jest --verbose",
     "lint": "eslint ."
   },
   "repository": {
@@ -25,7 +25,12 @@
     "mongoose-unique-validator": "^2.0.3"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
+    "eslint": "^6.6.0",
+    "eslint-plugin-react": "^7.16.0",
+    "jest": "^24.9.0",
     "nodemon": "^1.19.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
