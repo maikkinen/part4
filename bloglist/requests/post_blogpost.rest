@@ -2,8 +2,8 @@ POST  http://localhost:3003/api/blogs
 content-Type: application/json
 
 {
-    "title": "How fry butterflies",
+    "title": "How to pickle butterflies",
     "author": "Larry Greenleaf",
     "url": "www.wonderful-nature.larrysblog.net",
-    "likes": 4
+    "likes": 2204
 }

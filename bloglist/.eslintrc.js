@@ -16,12 +16,12 @@ module.exports = {
     'rules': {
         'indent': [
             'error',
-            4
+            2
         ],
         'linebreak-style': 0,
         'quotes': [
             'error',
-            'double'
+            'single'
         ],
         'semi': [
             'error',
