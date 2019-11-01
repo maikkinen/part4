@@ -2,8 +2,8 @@ POST  http://localhost:3003/api/blogs
 content-Type: application/json
 
 {
-    "title": "How to pickle butterflies",
+    "title": "Testing different nets for butterflies",
     "author": "Larry Greenleaf",
     "url": "www.wonderful-nature.larrysblog.net",
-    "likes": 2204
+    "likes": 43
 }
