@@ -47,6 +47,7 @@ beforeEach(async () => {
   await blogObject.save()
 })
 
+//Checking format
 test('notes are returned as json', async () => {
   await api
     .get('/api/blogs')
@@ -67,6 +68,58 @@ test('the first blog is about goat cheese', async () => {
   expect(resTitle).toContain('Bästa getostar i mathallen')
 
 })
+
+//4.10 Checking that post works propely
+test('a valid blogpost can be added', async () => {
+  const newBlog = {
+    title: 'Ka Norge tenker om Brexit',
+    author: 'Sinfidir Jensen',
+    url: 'www.norskpolitikk.no',
+    likes: 10000,
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/blogs')
+
+  const blogTitles = response.body.map(r => r.title)
+
+  expect(response.body.length).toBe(initialBlogs.length + 1)
+  expect(blogTitles).toContain(
+    'Ka Norge tenker om Brexit'
+  )
+})
+
+//4.9 assure that the identifier field is called 'id', as by default it's '__id'.
+//Use: toBeDefined. 
+//toJSON is the place to define parameter 'id'.
+
+
+//Checking that u can't post a blog with only an url
+test('blogposts must have a proper title', async () => {
+  const newBlog = {
+    author: 'Kalle Konstig',
+    url: 'konstigt.blog.no',
+    likes: 0
+  }
+
+  await api
+    .post('/api/blogs/')
+    .send(newBlog)
+    .expect(400)
+
+  // const response = await api.get('/api/blogs')
+
+  //Sexpect(response.body.length).toBe(initialBlogs.length)
+})
+
+//4.11 if likes is empty, set 0 as its initial value.
+
+//4.12 if trying to make a blogpost without title and url, respond with '400 Bad request'
 
 afterAll(() => {
   mongoose.connection.close()
