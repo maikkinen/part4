@@ -2,48 +2,22 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 const mongoose = require('mongoose')
+const helper = require('./test_helper')
 const Blog = require('../models/blogpost')
-
-const initialBlogs = [
-  {
-    title: 'Bästa getostar i mathallen',
-    author: 'Lina Lund',
-    url: 'www.linas-ostfabrik.se',
-    likes: 10,
-  },
-  {
-    title: 'Bästa biffarna i mathallen',
-    author: 'Lina Lund',
-    url: 'www.linas-ostfabrik.se',
-    likes: 100,
-  },
-  {
-    title: 'Bästa vinerna i mathallen',
-    author: 'Lina Lund',
-    url: 'www.linas-ostfabrik.se',
-    likes: 1000,
-  },
-  {
-    title: 'Såhär kokar du världens bästa musslor',
-    author: 'Mats Matman',
-    url: 'www.matsmat.blog.se',
-    likes: 200,
-  },
-]
 
 beforeEach(async () => {
   await Blog.deleteMany({})
 
-  let blogObject = new Blog(initialBlogs[0])
+  let blogObject = new Blog(helper.initialBlogs[0])
   await blogObject.save()
 
-  blogObject = new Blog(initialBlogs[1])
+  blogObject = new Blog(helper.initialBlogs[1])
   await blogObject.save()
 
-  blogObject = new Blog(initialBlogs[2])
+  blogObject = new Blog(helper.initialBlogs[2])
   await blogObject.save()
 
-  blogObject = new Blog(initialBlogs[3])
+  blogObject = new Blog(helper.initialBlogs[3])
   await blogObject.save()
 })
 
@@ -58,7 +32,7 @@ test('notes are returned as json', async () => {
 test('there are quite a few blogs', async () => {
   const response = await api.get('/api/blogs')
 
-  expect(response.body.length).toBe(initialBlogs.length)
+  expect(response.body.length).toBe(helper.initialBlogs.length)
 })
 
 test('the first blog is about goat cheese', async () => {
@@ -84,11 +58,10 @@ test('a valid blogpost can be added', async () => {
     .expect(200)
     .expect('Content-Type', /application\/json/)
 
-  const response = await api.get('/api/blogs')
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd.length).toBe(helper.initialBlogs.length + 1)
 
-  const blogTitles = response.body.map(r => r.title)
-
-  expect(response.body.length).toBe(initialBlogs.length + 1)
+  const blogTitles = blogsAtEnd.map(r => r.title)
   expect(blogTitles).toContain(
     'Ka Norge tenker om Brexit'
   )
@@ -99,11 +72,10 @@ test('a valid blogpost can be added', async () => {
 //toJSON is the place to define parameter 'id'.
 
 
-//Checking that u can't post a blog with only an url
-test('blogposts must have a proper title', async () => {
+//4.12 Checking that u can't post a blog with out title and url
+test('blogposts must have a proper title and url', async () => {
   const newBlog = {
     author: 'Kalle Konstig',
-    url: 'konstigt.blog.no',
     likes: 0
   }
 
@@ -112,14 +84,11 @@ test('blogposts must have a proper title', async () => {
     .send(newBlog)
     .expect(400)
 
-  // const response = await api.get('/api/blogs')
-
-  //Sexpect(response.body.length).toBe(initialBlogs.length)
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
 })
 
 //4.11 if likes is empty, set 0 as its initial value.
-
-//4.12 if trying to make a blogpost without title and url, respond with '400 Bad request'
 
 afterAll(() => {
   mongoose.connection.close()
