@@ -2,8 +2,8 @@ POST  http://localhost:3003/api/blogs
 content-Type: application/json
 
 {   
-    "title": "Malformatted code is like Butterflies without wings",
-    "author": "Larry Greenleaf",
-    "url": "www.wonderful-nature.larrysblog.net",
-    "likes": 43
+    "title": "Ivory silver iPhone",
+    "author": "Steven Mc. Book",
+    "url": "www.macbook.ios",
+    "likes": 42
 }

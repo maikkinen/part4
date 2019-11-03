@@ -15,6 +15,7 @@ blogsRouter.post('/', (request, response) => {
         //response.status(201).json(result)
         response.json(result.toJSON())
         console.log('yey new blogpost added')
+        response.status(200).end()
       })
       .catch(error => {
         console.log('cannot post that dude')

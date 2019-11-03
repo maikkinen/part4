@@ -89,6 +89,18 @@ test('blogposts must have a proper title and url', async () => {
 })
 
 //4.11 if likes is empty, set 0 as its initial value.
+test('likes is 0 by default, if nothing else specified', async () => {
+  const newBlog = {
+    title: 'Rosegold iPhone',
+    author: 'Steven Mc. Book',
+    url: 'www.macbook.ios'
+  }
+
+  await api
+    .post('/api/blogs/')
+    .send(newBlog)
+    .expect(200)
+})
 
 afterAll(() => {
   mongoose.connection.close()
