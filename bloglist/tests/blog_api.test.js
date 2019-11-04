@@ -70,7 +70,14 @@ test('a valid blogpost can be added', async () => {
 //4.9 assure that the identifier field is called 'id', as by default it's '__id'.
 //Use: toBeDefined. 
 //toJSON is the place to define parameter 'id'.
+test('blogs are identified by id', async () => {
+  const response = await api.get('/api/blogs')
 
+  //response.json(response.toJSON())
+
+  expect(response.body[0].id).toBeDefined()
+  console.log('1st id is ', response.body[0].id)
+})
 
 //4.12 Checking that u can't post a blog with out title and url
 test('blogposts must have a proper title and url', async () => {
