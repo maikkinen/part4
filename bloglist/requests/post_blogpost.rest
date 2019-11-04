@@ -2,8 +2,6 @@ POST  http://localhost:3003/api/blogs
 content-Type: application/json
 
 {   
-    "title": "Ivory silver iPhone",
-    "author": "Steven Mc. Book",
-    "url": "www.macbook.ios",
-    "likes": 42
+    "author": "Stella McBride",
+    "likes": 30244
 }

@@ -3,29 +3,55 @@ const Blog = require('../models/blogpost')
 
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({})
+
   response.json(blogs.map(blog => blog.toJSON()))
 })
 
-blogsRouter.post('/', (request, response) => {
-  try {
-    const blog = new Blog(request.body)
-    blog
-      .save()
-      .then(result => {
-        //response.status(201).json(result)
-        response.json(result.toJSON())
-        console.log('yey new blogpost added')
-        response.status(200).end()
-      })
-      .catch(error => {
-        console.log('cannot post that dude')
-        console.log(request.body)
-        console.log(response.body)
-        response.status(400).end()
-      })
-  } catch (error) {
-    response.status(400).end()
+blogsRouter.post('/', async (request, response, next) => {
+  const body = request.body
 
+  const blog = new Blog({
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes,
+  })
+
+  try {
+    const savedBlog = await blog.save()
+    response.json(savedBlog.toJSON())
+  } catch(exception) {
+    next(exception)
+  }
+})
+
+blogsRouter.delete('/:id', async (request, response, next) => {
+  try {
+    await Blog.findByIdAndRemove(request.params.id)
+    response.status(204).end()
+  } catch (exception) {
+    next (exception)
+  }
+})
+
+blogsRouter.put('/:id', async (request, response, next) => {
+  const body = request.body
+
+  const blog = {
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes,
+    id: body.id
+  }
+
+  console.log(request.body)
+
+  try {
+    await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+    response.json(blog.toJSON)
+  } catch (exception) {
+    next (exception)
   }
 
 })

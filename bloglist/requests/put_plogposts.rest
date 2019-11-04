@@ -1,0 +1,10 @@
+PUT http://localhost:3003/api/blogs/5db6ed3ca1d8a638083becb1
+Content-Type: application/json
+
+
+  {
+    "likes": 15,
+    "title": "HTML is oldschool",
+    "author": "Sam Supernerd",
+    "url": "www.nerds.sam"
+  }
