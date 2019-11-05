@@ -1,10 +1,11 @@
-PUT http://localhost:3003/api/blogs/5db6ed3ca1d8a638083becb1
+PUT http://localhost:3003/api/blogs/5dc157e98b01e553d89d7d9c
 Content-Type: application/json
 
 
   {
     "likes": 17,
-    "title": "HTML is oldschool",
-    "author": "Sam Supernerd",
-    "url": "www.nerds.sam"
+    "title": "Whaling is criminal",
+    "author": "Timo Toukkavalas",
+    "url": "www.whalelife.net",
+    "userId": "5dc152dd10ab0838a4dd3c24"
   }
