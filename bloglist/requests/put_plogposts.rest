@@ -3,7 +3,7 @@ Content-Type: application/json
 
 
   {
-    "likes": 15,
+    "likes": 17,
     "title": "HTML is oldschool",
     "author": "Sam Supernerd",
     "url": "www.nerds.sam"
