@@ -55,6 +55,7 @@ describe('posting works properly', () => {
       author: 'Sinfidir Jensen',
       url: 'www.norskpolitikk.no',
       likes: 10000,
+      userId: '5dc5529f7b56cd3558641bc7',
     }
 
     await api
@@ -76,7 +77,8 @@ describe('posting works properly', () => {
   test('blogposts must have a proper title and url', async () => {
     const newBlog = {
       author: 'Kalle Konstig',
-      likes: 0
+      likes: 0,
+      userId: '5dc5529f7b56cd3558641bc7'
     }
 
     await api
@@ -93,7 +95,8 @@ describe('posting works properly', () => {
     const newBlog = {
       title: 'Rosegold iPhone',
       author: 'Steven Mc. Book',
-      url: 'www.macbook.ios'
+      url: 'www.macbook.ios',
+      userId: '5dc5529f7b56cd3558641bc7'
     }
 
     await api
@@ -117,6 +120,7 @@ describe('deleting and updating (put)', () => {
       title: 'HTML is oldschool',
       author: 'Sam Supernerd',
       url: 'www.nerds.sam',
+      userId: '5dc5529f7b56cd3558641bc7',
     }
 
     await api

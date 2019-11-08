@@ -2,9 +2,9 @@ POST  http://localhost:3003/api/blogs
 content-Type: application/json
 
   {
-    "likes": 40,
-    "title": "I kinda like salmon",
+    "likes": 450,
+    "title": "Best Fishing Spots in Göteborg",
     "author": "Timo Toukkavalas",
     "url": "www.whalelife.net",
-    "userId": "5dc15b2db78ba13ed09b1a5e"
+    "userId": "5dc152dd10ab0838a4dd3c24"
   }

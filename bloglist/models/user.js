@@ -6,7 +6,10 @@ const userSchema = mongoose.Schema({
     type: String,
     unique: true
   },
-  name: String,
+  name: {
+    type: String,
+    unique: true
+  },
   passwordHash: String,
   blogs: [
     {

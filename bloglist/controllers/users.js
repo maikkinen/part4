@@ -1,15 +1,27 @@
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+let users = []
 
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({})
+  users = await User.find({})
   response.json(users.map(u => u.toJSON()))
 })
 
 usersRouter.post('/', async (request, response, next) => {
   try {
     const body = request.body
+
+    //This is needed for checking that users have unique names.
+    //if: passw min 8 char long
+    //else if: name is unique
+    //both passed --> new user created.
+
+    if(body.password.length <= 7) {
+      return response.status(400).json({
+        error: 'Password has to be min 8 char long.'
+      })
+    }
 
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
