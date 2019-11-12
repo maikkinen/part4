@@ -1,10 +1,10 @@
-POST  http://localhost:3003/api/blogs
-content-Type: application/json
+POST  http://localhost:3003/api/blogs HTTP/1.1
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkzDtmxsw7YiLCJpZCI6IjVkYzU1MTMwYTIyMDAzNTRmMDlhMWY5ZCIsImlhdCI6MTU3MzU2OTU1OH0.t4JfL7L7tVdusAmF6Lg3NVvThdzdLlN2CifkvXvZR3s
 
   {
-    "likes": 450,
-    "title": "Best Fishing Spots in Göteborg",
-    "author": "Timo Toukkavalas",
-    "url": "www.whalelife.net",
-    "userId": "5dc152dd10ab0838a4dd3c24"
+    "likes": "458",
+    "title": "Polloelamaa",
+    "author": "Leevi Lapinpollo",
+    "url": "www.pollo.net"
   }
